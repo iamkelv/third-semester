@@ -5,7 +5,7 @@
         <nav-bar></nav-bar>
       </span>
     </div>
-    <div class="px-[10%] mt-[50px] tablet:mt-[200px]">
+    <div class="px-[5%] tablet:px-[10%] mt-[50px] tablet:mt-[200px]">
       <router-view></router-view>
       <div v-if="isLogin">
         <footer-section></footer-section>
@@ -47,7 +47,13 @@ export default {
       () => this.loadProducts(),
     )
     this.$router.beforeEach((to) => {
-      if (!this.$store.getters.isLogged && to.name !== 'Login') {
+      if (
+        // make sure the user is authenticated
+        !this.$store.getters.isLogged &&
+        //Avoid an infinite loop
+        to.name !== 'Login'
+      ) {
+        // redirect the user to the login page
         return { name: 'Login' }
       }
     })

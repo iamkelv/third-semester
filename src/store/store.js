@@ -5,7 +5,8 @@ export const store = createStore({
     return {
       isLoggin: false || !!checkLoginState,
       products: [],
-      cartItems: [],
+      cartItems: [{ id: 2, price: 899, qty: 0, title: 'iPhone X' }],
+      qty: 0,
       singleProduct: {},
     }
   },
@@ -26,17 +27,22 @@ export const store = createStore({
       localStorage.removeItem('auth')
     },
     addCart(state, payload) {
+      // console.log(payload)
       const selectedProduct = state.cartItems.find(
         (item) => item.id === payload.id,
       )
-      if (!selectedProduct) {
-        state.cartItems = state.cartItems.push(payload)
-      }
+      console.log(selectedProduct)
+      console.log(state.qty)
+      // if (!selectedProduct) {
+      //   return (state.cartItems = state.cartItems.push(payload))
+      // } else {
+      //   return (selectedProduct.qty = selectedProduct.qty + payload.qty)
+      // }
     },
   },
   actions: {
-    GetcartToCart({ commit }, payload) {
-      commit('getProduct', {
+    addToCart({ commit }, payload) {
+      commit('addCart', {
         id: payload.id,
         title: payload.title,
         price: payload.price,
@@ -70,6 +76,12 @@ export const store = createStore({
     },
     getSingleProduct(state) {
       return state.singleProduct
+    },
+    getCart(state) {
+      return state.cartItems
+    },
+    getQty(state) {
+      state.qty
     },
   },
 })

@@ -4,7 +4,7 @@
   >
     <div class="flex justify-center items-center rounded-lg p-2">
       <img
-        :src="img"
+        :src="images"
         alt=""
         class="cursor-zoom-in max-w-[200px] -rotate-45 hover:scale-125 transition-all max-h-[500px]"
       />
@@ -62,6 +62,7 @@
           <fa-icon icon="fa-pen-to-square" />
         </button>
         <button
+          @click="addToCart"
           class="flex items-center mb-4 py-3 text-center justify-center px-3 bg-[rgb(0,142,204)] text-white font-semibold rounded-lg shadow-xl drop-shadow-lg"
         >
           Add to Cart
@@ -86,32 +87,43 @@ export default {
   data() {
     return {
       img: img,
+      image: null,
     }
   },
   computed: {
     getProduct() {
       return this.$store.getters.getSingleProduct
     },
+    images() {
+      let image = this.getProduct.images[0]
+      return image
+    },
   },
   created() {
     this.$watch(
       () => this.$route.params,
       () => this.loadProduct(),
-      // (toParams, previousParams) => {
-      //   // react to route changes...
-      //   loadProduct()
-      // },
     )
   },
   methods: {
+    addToCart() {
+      this.$store.dispatch('addToCart', {
+        id: this.getProduct.id,
+        title: this.getProduct.title,
+        price: this.getProduct.price,
+        qty: '2',
+      })
+    },
     loadProduct() {
       const { productId } = this.$route.params
-
       this.$store.dispatch('getSingleProduct', productId)
     },
   },
+
   async mounted() {
     this.loadProduct()
+    const image = await this.getProduct.images[2]
+    this.image = image
   },
 }
 </script>

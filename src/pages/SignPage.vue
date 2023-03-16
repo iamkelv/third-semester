@@ -66,6 +66,18 @@ export default {
       isLoading: false,
     }
   },
+  // beforeRouteEnter(to, from, next) {
+  //   // if (this.getIsLogged) {
+  //   //   next('/')
+  //   // } else {
+  //   //   next()
+  //   // }
+  // },
+  computed: {
+    getIsLogged() {
+      return this.$store.getters.isLogged
+    },
+  },
   created() {
     // window.screenTop = 0
     // this.$router.beforeEach((to) => {

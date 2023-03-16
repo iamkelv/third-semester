@@ -54,14 +54,12 @@
             <span
               class="absolute -top-2 p-1 text-[12px] -right-2 bg-black flex text-white w-[1rem] h-[1rem] items-center justify-center rounded-full"
             >
-              1
+              {{ cartQty }}
             </span>
             <fa-icon class="text-[#008ECC]" icon="fa-solid fa-cart-shopping" />
           </span>
 
-          <span>
-            Cart
-          </span>
+          <span>Cart {{ cartQty }}</span>
         </router-link>
       </span>
     </span>
@@ -75,9 +73,13 @@ export default {
   components: {
     UserProfile,
   },
+
   computed: {
     isLogged() {
       return this.$store.getters.isLogged
+    },
+    cartQty() {
+      return this.$store.getters.getQty
     },
   },
 }

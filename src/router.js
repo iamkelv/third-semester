@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from './pages/HomePage.vue'
 import NotFound from './pages/PageNotFound.vue'
+import { store } from './store/store'
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -16,6 +17,11 @@ export const router = createRouter({
     },
 
     {
+      beforeEnter: () => {
+        if (store.getters.isLogged) {
+          return router.replace('/')
+        }
+      },
       name: 'Login',
       path: '/login',
       component: () => import('./pages/SignPage.vue'),
