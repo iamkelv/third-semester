@@ -1,76 +1,58 @@
 <template>
-  <div class="text-red-500 w-screen bg-black">
-    <h1 class="text-green-500">
-      <ul class="flex list-none gap-2 mx-auto w-[50%]">
-        <li class="cursor-pointer">
-          Home
-        </li>
-        <li class="cursor-pointer">
-          Services
-        </li>
-
-        <li class="cursor-pointer" v-if="isLogged">
-          Profile
-        </li>
-        <li class="cursor-pointer" v-if="isLogged">
-          Logout
-        </li>
-      </ul>
-    </h1>
-    <div>
-      <button
-        class="bg-white text-black rounded-md p-2 cursor-pointer w-[100px]"
-        @click="getProducts"
-      >
-        Get all Products
-      </button>
-      <button
-        v-if="!isLogged"
-        class="bg-white text-black rounded-md p-2 cursor-pointer w-[100px]"
-        @click="login"
-      >
-        Login
-      </button>
-      <button
-        v-if="isLogged"
-        class="bg-white text-black rounded-md p-2 cursor-pointer w-[100px]"
-      >
-        logout
-      </button>
-      <products-items></products-items>
+  <div class="relative">
+    <div v-if="isLogin" class="flex relative">
+      <span class="fixed bg-red-300 z-10">
+        <nav-bar></nav-bar>
+      </span>
+    </div>
+    <div class="px-[10%] mt-[50px] tablet:mt-[200px]">
+      <router-view></router-view>
+      <div v-if="isLogin">
+        <footer-section></footer-section>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import ProductsItems from './components/ProductsItems.vue'
+import FooterSection from './components/FooterSection.vue'
+import NavBar from './components/NavBar.vue'
 export default {
   name: 'App',
-
+  components: {
+    FooterSection,
+    NavBar,
+  },
   data() {
     return {
-      // menus: [],
+      menu: [''],
     }
   },
-  components: {
-    ProductsItems,
-  },
   computed: {
-    isLogged() {
+    products() {
+      return this.$store.getters.getProducts
+    },
+    isLogin() {
       return this.$store.getters.isLogged
     },
   },
   methods: {
-    getProducts() {
-      this.$store.dispatch('products')
-    },
-    login() {
-      this.$store.dispatch('login')
-    },
-    logout() {
-      this.$store.dispatch('logout')
+    loadProducts() {
+      this.$store.dispatch('getProducts')
     },
   },
+  created() {
+    this.$watch(
+      () => this.$route.path,
+      () => this.loadProducts(),
+    )
+    this.$router.beforeEach((to) => {
+      if (!this.$store.getters.isLogged && to.name !== 'Login') {
+        return { name: 'Login' }
+      }
+    })
+  },
+  mounted() {},
 }
 </script>
 
