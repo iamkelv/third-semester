@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="px-[10%] bg-[#05ABF3] p-5 text-white mb-20 tablet:mb-0 fixed tablet:relative bottom-0"
+    class="px-[10%] bg-[#05ABF3] p-5 text-white mb-20 tablet:mb-0 bottom-0"
   >
     <span class="hidden tablet:grid grid-cols-3 h-[50vh]">
       <span class="flex flex-col gap-5">
