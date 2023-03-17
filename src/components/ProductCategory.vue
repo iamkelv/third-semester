@@ -13,44 +13,50 @@
       </router-link>
     </span>
   </div>
-  <Carousel :settings="settings" :breakpoints="breakpoints">
-    <Slide v-for="product in products" :key="product.id">
-      <router-link :to="`/product/${product.id}`">
-        <div
-          class="carousel__item flex flex-col relative bg-white text-[black] font-mono font-thin"
-        >
-          <span
-            class="absolute bg-[#008ECC] p-1 mt-1 max-w-[3rem] -top-1 -right-[10%] rounded-full flex items-center"
+  <div v-if="isLoading">
+    <div><products-loading></products-loading></div>
+  </div>
+  <div v-else>
+    <Carousel :settings="settings" :breakpoints="breakpoints">
+      <Slide v-for="product in products" :key="product.id">
+        <router-link :to="`/product/${product.id}`">
+          <div
+            class="carousel__item flex flex-col relative bg-white text-[black] font-mono font-thin"
           >
-            <span class="text-[12px] text-white font-thin">65% OFF</span>
-          </span>
-          <span>
-            <img :src="`${product.images[0]}`" alt="" class="max-w-[100px]" />
-          </span>
-          <span class="font-['HK Grotesk'] flex flex-col text-[12px]">
-            <span>{{ product.title }}</span>
-            <span>Price: ${{ product.price }}</span>
-            <span>Stock: {{ product.stock }}</span>
-          </span>
-        </div>
-      </router-link>
-    </Slide>
-
-    <template #addons>
-      <Navigation />
-    </template>
-  </Carousel>
+            <span
+              class="absolute bg-[#008ECC] p-1 mt-1 max-w-[3rem] -top-1 -right-[10%] rounded-full flex items-center"
+            >
+              <span class="text-[12px] text-white font-thin">65% OFF</span>
+            </span>
+            <span>
+              <img :src="`${product.images[0]}`" alt="" class="max-w-[100px]" />
+            </span>
+            <span class="font-['HK Grotesk'] flex flex-col text-[12px]">
+              <span>{{ product.title }}</span>
+              <span>Price: ${{ product.price }}</span>
+              <span>Stock: {{ product.stock }}</span>
+            </span>
+          </div>
+        </router-link>
+      </Slide>
+      <template #addons>
+        <Navigation />
+      </template>
+    </Carousel>
+  </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
 import { Carousel, Navigation, Slide } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
+import ProductsLoading from './ProductsLoading.vue'
 
 export default defineComponent({
   name: 'BreakPoints',
   props: ['title', 'subTitle'],
   components: {
+    ProductsLoading,
     Carousel,
     Slide,
     Navigation,
@@ -58,6 +64,9 @@ export default defineComponent({
   computed: {
     products() {
       return this.$store.getters.getProducts
+    },
+    isLoading() {
+      return this.$store.getters.isLoading
     },
   },
   methods: {},
