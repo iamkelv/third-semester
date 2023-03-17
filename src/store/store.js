@@ -9,7 +9,7 @@ export const store = createStore({
       qty: 0,
       isLoading: false,
       singleProduct: {},
-      switchLogin: false,
+      switchLogin: true,
     }
   },
   mutations: {
