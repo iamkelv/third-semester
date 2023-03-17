@@ -27,15 +27,7 @@ export default {
   },
   data() {
     return {
-      menus: [
-        'Smart Phones',
-        'Laptops',
-        'Fragrances',
-        'Skincare',
-        'Groceries',
-        'Womens-Dresses',
-        'Womens-shoes',
-      ],
+      menus: ['Smart Phones', 'Laptops', 'Fragrances', 'Skincare', 'Groceries'],
     }
   },
   methods: {

@@ -59,7 +59,7 @@
             <fa-icon class="text-[#008ECC]" icon="fa-solid fa-cart-shopping" />
           </span>
 
-          <span>Cart {{ cartQty }}</span>
+          <span>Cart {{ cartQty.length }}</span>
         </router-link>
       </span>
     </span>
@@ -79,7 +79,7 @@ export default {
       return this.$store.getters.isLogged
     },
     cartQty() {
-      return this.$store.getters.getQty
+      return this.$store.getters.getAllCarts
     },
   },
 }

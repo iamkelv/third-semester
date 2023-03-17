@@ -1,12 +1,16 @@
 <template>
+  <div class="relative top-[20vh]">
+    Kelvin
+  </div>
+
   <div
-    class="grid mb-[2rem] gap-2 grid-cols-1 tablet:grid-cols-2 w-full relative my-2 bg-[#FDFDFD] shadow-2xl rounded-lg drop-shadow-xl overflow-auto top-10 tablet:top-0"
+    class="grid mb-[2rem] gap-2 grid-cols-1 tablet:grid-cols-2 w-full relative my-2 bg-[#FDFDFD] shadow-2xl rounded-lg drop-shadow-xl overflow-auto top-10 tablet:top-0 overflow-x-hidden"
   >
     <div class="flex justify-center items-center rounded-lg p-2">
       <img
-        :src="images"
-        alt=""
-        class="cursor-zoom-in max-w-[200px] -rotate-45 hover:scale-125 transition-all max-h-[500px]"
+        :src="getProduct.thumbnail"
+        alt="product"
+        class="cursor-zoom-in max-w-[300px] w-[300px] tablet:-rotate-45 hover:scale-125 transition-all max-h-[500px]"
       />
     </div>
     <div class="flex flex-col gap-3 max-w-[70%] w-full mx-auto mt-[15%]">
@@ -87,16 +91,11 @@ export default {
   data() {
     return {
       img: img,
-      image: null,
     }
   },
   computed: {
     getProduct() {
       return this.$store.getters.getSingleProduct
-    },
-    images() {
-      let image = this.getProduct.images[0]
-      return image
     },
   },
   created() {
@@ -122,8 +121,7 @@ export default {
 
   async mounted() {
     this.loadProduct()
-    const image = await this.getProduct.images[2]
-    this.image = image
+    console.log(this.apiImage)
   },
 }
 </script>

@@ -1,5 +1,7 @@
 <template>
-  <footer class="px-[10%] bg-[#05ABF3] p-5 text-white">
+  <footer
+    class="px-[10%] bg-[#05ABF3] p-5 text-white mb-20 tablet:mb-0 fixed tablet:relative bottom-0"
+  >
     <span class="hidden tablet:grid grid-cols-3 h-[50vh]">
       <span class="flex flex-col gap-5">
         <span class="text-[1.5rem] font-bold font-sans">MegaMart</span>
@@ -89,7 +91,7 @@
         <router-link to="https://iamkelv.vercel.app/">Kelvin Moses</router-link>
       </span>
     </span>
-    <span class="fixed z-50 flex tablet:hidden">
+    <span class="fixed z-50 flex mt-5 tablet:hidden">
       <mobile-footer></mobile-footer>
     </span>
   </footer>

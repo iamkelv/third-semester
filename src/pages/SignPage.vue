@@ -1,6 +1,11 @@
 <template>
   <div
-    class="grid grid-cols-1 relative -top-[20vh] justify-center items-center tablet:grid-cols-3 p-1 h-[60vh]"
+    class="flex font-extrabold text-[1rem] items-center justify-center tablet:mb-[10vh] mb-[0vh] w-full"
+  >
+    <span class="tablet:text-[2.5rem]">Welcome to MefaMart</span>
+  </div>
+  <div
+    class="grid grid-cols-1 relative justify-center items-center tablet:grid-cols-3 p-1 h-[60vh] tablet:-top-[20vh] top-10"
   >
     <span class="flex font-sans gap-1 justify-center flex-col items-center">
       <span class="text-4xl font-bold">
@@ -51,7 +56,7 @@
       <button
         class="bg-[rgb(0,142,204)] rounded-lg mt-3 text-white p-2 w-full max-w-[70%]"
       >
-        {{ isLoading ? 'Loading' : 'Sign In' }}
+        {{ isLoading ? 'Loading...' : 'Sign In' }}
       </button>
     </form>
   </div>
@@ -66,26 +71,13 @@ export default {
       isLoading: false,
     }
   },
-  // beforeRouteEnter(to, from, next) {
-  //   // if (this.getIsLogged) {
-  //   //   next('/')
-  //   // } else {
-  //   //   next()
-  //   // }
-  // },
+
   computed: {
     getIsLogged() {
       return this.$store.getters.isLogged
     },
   },
-  created() {
-    // window.screenTop = 0
-    // this.$router.beforeEach((to) => {
-    //   if (!this.$store.getters.isLogged && to.name !== 'Login') {
-    //     return { name: 'Login' }
-    //   }
-    // })
-  },
+  created() {},
   methods: {
     formSubmitHandler(e) {
       e.preventDefault()

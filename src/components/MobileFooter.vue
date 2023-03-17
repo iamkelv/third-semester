@@ -24,7 +24,7 @@
         Cart
       </v-btn>
 
-      <v-btn>
+      <v-btn @click="user">
         <v-btn class="text-none" stacked>
           <v-icon><fa-icon icon="fa-sharp fa-user" /></v-icon>
         </v-btn>
@@ -43,6 +43,13 @@ export default {
     },
     home() {
       this.$router.push('/')
+    },
+    menu() {
+      this.$router.push('/')
+    },
+    user() {
+      this.$store.dispatch('getLogout')
+      this.$router.replace('/login')
     },
   },
 }

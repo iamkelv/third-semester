@@ -2,6 +2,15 @@
   <span
     class="relative hidden tablet:flex w-full gap-3 mx-auto my-0 justify-center mt-2 flex-wrap"
   >
+    <span class="flex flex-col gap-2">
+      <span
+        class="px-6 flex cursor-pointer max-w-fit p-2 bg-[rgb(0,142,204)] rounded-md items-center gap-3 align-middle text-white flex-wrap"
+      >
+        <router-link to="/sdsdsd">
+          <span class="text-[16px]">404 page</span>
+        </router-link>
+      </span>
+    </span>
     <span
       :click="showOption"
       class="flex flex-col gap-2"

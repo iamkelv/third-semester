@@ -46,6 +46,7 @@ export default {
       () => this.$route.path,
       () => this.loadProducts(),
     )
+    this.$store.dispatch('getAllCarts')
     this.$router.beforeEach((to) => {
       if (
         // make sure the user is authenticated

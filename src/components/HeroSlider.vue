@@ -31,10 +31,6 @@ import { defineComponent } from 'vue'
 import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
 
 import 'vue3-carousel/dist/carousel.css'
-// import img1 from '../assets/img/img1.jpg'
-// import img2 from '../assets/img/img2.jpg'
-// import img3 from '../assets/img/img3.jpg'
-// import img4 from '../assets/img/img4.jpg'
 import bg1 from '../assets/img/bg1.png'
 
 export default defineComponent({

@@ -5,7 +5,7 @@ export const store = createStore({
     return {
       isLoggin: false || !!checkLoginState,
       products: [],
-      cartItems: [{ id: 2, price: 899, qty: 0, title: 'iPhone X' }],
+      cartItems: [],
       qty: 0,
       singleProduct: {},
     }
@@ -16,7 +16,7 @@ export const store = createStore({
     },
     singleProduct(state, data) {
       state.singleProduct = data
-      console.log('data')
+      console.log(data)
     },
     login(state) {
       state.isLoggin = true
@@ -26,18 +26,10 @@ export const store = createStore({
       state.isLoggin = false
       localStorage.removeItem('auth')
     },
-    addCart(state, payload) {
-      // console.log(payload)
-      const selectedProduct = state.cartItems.find(
-        (item) => item.id === payload.id,
-      )
-      console.log(selectedProduct)
-      console.log(state.qty)
-      // if (!selectedProduct) {
-      //   return (state.cartItems = state.cartItems.push(payload))
-      // } else {
-      //   return (selectedProduct.qty = selectedProduct.qty + payload.qty)
-      // }
+    addCart() {},
+    getAllCart(state, payload) {
+      const newCart = payload.slice(0, 1).map((item) => item.products)
+      state.cartItems = state.cartItems.push(newCart[0][0])
     },
   },
   actions: {
@@ -65,6 +57,11 @@ export const store = createStore({
     getLogout({ commit }) {
       commit('logout')
     },
+    async getAllCarts({ commit }) {
+      const res = await fetch('https://dummyjson.com/carts')
+      const data = await res.json()
+      commit('getAllCart', data.carts)
+    },
   },
 
   getters: {
@@ -82,6 +79,9 @@ export const store = createStore({
     },
     getQty(state) {
       state.qty
+    },
+    getAllCarts(state) {
+      return state.cartItems
     },
   },
 })
