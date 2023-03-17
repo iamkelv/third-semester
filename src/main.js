@@ -16,6 +16,8 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 
 dom.watch()
 
@@ -26,6 +28,9 @@ const vuetify = createVuetify({
 
 const app = createApp(App)
 
+app.config.productionTip = false
+
+app.use(Toast)
 library.add(fas, fab, faUserSecret)
 app.component('fa-icon', FontAwesomeIcon)
 app.use(vuetify)

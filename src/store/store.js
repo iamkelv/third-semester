@@ -8,9 +8,13 @@ export const store = createStore({
       cartItems: [],
       qty: 0,
       singleProduct: {},
+      switchLogin: false,
     }
   },
   mutations: {
+    switchLogin(state) {
+      state.switchLogin = !state.switchLogin
+    },
     products(state, data) {
       state.products = data
     },
@@ -62,6 +66,9 @@ export const store = createStore({
       const data = await res.json()
       commit('getAllCart', data.carts)
     },
+    switchLogin({ commit }) {
+      commit('switchLogin')
+    },
   },
 
   getters: {
@@ -82,6 +89,9 @@ export const store = createStore({
     },
     getAllCarts(state) {
       return state.cartItems
+    },
+    switchLogin(state) {
+      return state.switchLogin
     },
   },
 })
