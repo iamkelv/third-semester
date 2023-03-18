@@ -27,10 +27,10 @@
         </span>
 
         <span class="grid grid-cols-1 tablet:grid-cols-3 items-center">
-          <span class="flex w-[50%] justify-center items-center tablet:w-full">
-            {{ cart.price }}
+          <span class="">${{ getPrice }}</span>
+          <span class="">
+            {{ qyt }}
           </span>
-
           <span class="flex items-center gap-1 w-fit justify-between">
             <button
               @click="decrease"
@@ -56,18 +56,28 @@
 
     <div class="flex tablet:flex-row flex-col justify-between items-start">
       <span class="w-full">
-        <span class="flex rounded-md border border-solid border-gray-400">
-          <input
-            type="text"
-            class="flex outline-none w-full tablet:w-[60%] border-none p-3"
-            placeholder="Vourcher Code"
-          />
-          <span
-            class="bg-[rgb(5,171,243)] text-white font-semibold cursor-pointer p-3 h-full"
-          >
-            Redeem
+        <form @submit.prevent>
+          <span class="flex rounded-md border border-solid border-gray-400">
+            <input
+              type="text"
+              class="flex outline-none w-full tablet:w-[100%] border-none p-3"
+              placeholder="Vourcher Code"
+              required
+            />
+            <button
+              @click="redeemVourcher"
+              class="bg-[rgb(5,171,243)] text-white font-semibold cursor-pointer p-3 h-full"
+            >
+              Redeem
+            </button>
           </span>
-        </span>
+          <p
+            v-if="getVourcher"
+            class="text-red-500 ease-out duration-300 py-2 font-bold mt-2"
+          >
+            Invalid Vourcher
+          </p>
+        </form>
       </span>
       <span
         class="w-full mt-3 px-5 tablet:max-w-[50%] justify-end items-end ml-0 flex flex-col gap-3"
@@ -75,11 +85,11 @@
         <span class="flex flex-col gap-3 justify-between w-[50%]">
           <span class="flex justify-between items-center">
             <span>Subtotal</span>
-            <span>$998</span>
+            <span>${{ subTotal }}</span>
           </span>
           <span class="flex justify-between items-center">
             <span>Shpping fee</span>
-            <span>$20</span>
+            <span>${{ fee }}</span>
           </span>
           <span class="flex justify-between items-center">
             <span>Coupon</span>
@@ -89,7 +99,7 @@
             class="flex text-2xl font-bold mt-6 justify-between items-center"
           >
             <span class="">Total</span>
-            <span>$45343</span>
+            <span>${{ total }}</span>
           </span>
           <span
             class="flex text-lg font-bold mt-6 justify-between items-center"
@@ -114,25 +124,54 @@ export default {
     return {
       img: sneakers,
       value: 1,
+      price: 200,
+      qyt: 1,
+      fee: 200,
+      isInvalid: false,
     }
   },
+
   methods: {
     increase() {
       this.value = this.value + 1
+      this.qyt = this.qyt + 1
+      this.fee = this.fee + 2
+    },
+    redeemVourcher() {
+      this.isInvalid = true
+      setTimeout(() => {
+        this.isInvalid = false
+      }, 3000)
     },
     decrease() {
       if (this.value < 2) {
         return this.value
       }
       this.value = this.value - 1
+      this.qyt = this.qyt - 1
     },
   },
   computed: {
+    getPrice() {
+      return this.price * this.qyt
+    },
     getAllCarts() {
       return this.$store.getters.getAllCarts
     },
+    getVourcher() {
+      return this.isInvalid
+    },
     itemQty() {
       return 1
+    },
+    subTotal() {
+      return this.price * this.qyt
+    },
+    getFee() {
+      return this.fee
+    },
+    total() {
+      return this.subTotal + this.fee
     },
   },
 }
