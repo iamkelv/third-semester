@@ -1,12 +1,12 @@
 <template>
   <div id="auth">
     <div
-      class="flex font-extrabold text-[1rem] items-center justify-center tablet:mb-[10vh] mb-[0vh] w-full"
+      class="flex font-extrabold text-[1rem] items-center justify-center tablet:mb-[0vh] mb-[0vh] w-full"
     >
       <span class="tablet:text-[2.5rem]">Welcome to MefaMart</span>
     </div>
     <div
-      class="grid grid-cols-1 relative justify-center items-center tablet:grid-cols-3 p-1 h-[60vh] tablet:-top-[20vh] top-10"
+      class="grid grid-cols-1 relative justify-center items-center tablet:grid-cols-3 p-1 h-[60vh] tablet:-top-[5vh] top-10"
       v-if="switchLogin"
     >
       <span class="flex font-sans gap-1 justify-center flex-col items-center">
